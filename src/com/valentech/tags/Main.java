@@ -1,6 +1,6 @@
 package com.valentech.tags;
 
-import com.valentech.tags.tageitor.TagEditor;
+import com.valentech.tags.tageditor.TagEditor;
 
 public class Main {
 
@@ -8,7 +8,6 @@ public class Main {
         TagEditor tagEditor = new TagEditor("D:/testFile1.txt");
         System.out.println("t "+ tagEditor.toString());
         tagEditor.getTags();
-        tagEditor.setTags();
         tagEditor.getTags();
     }
 }

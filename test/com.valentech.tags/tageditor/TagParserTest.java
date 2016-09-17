@@ -1,5 +1,7 @@
 package com.valentech.tags.tageditor;
 
+import com.valentech.tags.tageditor.exceptions.MalformedTagStringException;
+import com.valentech.tags.tageditor.model.TagParser;
 import org.junit.Test;
 
 import java.util.ArrayList;

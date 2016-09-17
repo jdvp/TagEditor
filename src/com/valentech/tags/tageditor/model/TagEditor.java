@@ -1,4 +1,7 @@
-package com.valentech.tags.tageditor;
+package com.valentech.tags.tageditor.model;
+
+import com.valentech.tags.tageditor.exceptions.MalformedTagStringException;
+import com.valentech.tags.tageditor.exceptions.TagTooLongException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -55,6 +58,8 @@ public class TagEditor {
             System.out.println("The file has no tags.");
         } catch (MalformedTagStringException e){
             System.out.println("The tags on the file are corrupted.");
+            //delete the corrupted tags since we can't use them anyway
+            clearTags();
         }
         return new ArrayList<>();
     }
@@ -63,7 +68,11 @@ public class TagEditor {
      * Convenience method for adding a single tag
      * @param tag the tag to add
      */
-    public void addTag(String tag){
+    public void addTag(String tag) {
+        //we shouldn't end up throwing this, but just in case...
+        if(tag.length() > Integer.MAX_VALUE - 2)
+            throw new TagTooLongException("Tag is too long");
+
         ArrayList<String> tags = getTags();
         tags.add(tag);
         setTags(tags);

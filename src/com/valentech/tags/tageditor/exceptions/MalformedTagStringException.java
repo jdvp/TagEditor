@@ -1,4 +1,4 @@
-package com.valentech.tags.tageditor;
+package com.valentech.tags.tageditor.exceptions;
 
 /**
  * Error that specifies that a tag string is broken or malformed

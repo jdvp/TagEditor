@@ -5,7 +5,7 @@ package com.valentech.tags.tageditor.exceptions;
  * 'Too long' means that the tag is larger than the longest allowable string length - 2 (for the start and end bracket)
  */
 public class TagTooLongException extends RuntimeException {
-    public TagTooLongException(String error){
-        super(error);
+    public TagTooLongException(){
+        super("Tag is too long");
     }
 }

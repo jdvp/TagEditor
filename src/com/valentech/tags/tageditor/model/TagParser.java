@@ -27,7 +27,7 @@ public class TagParser {
 
         //tags are already malformed if they aren't bracketed
         if(!tags.startsWith("[") || !tags.endsWith("]")){
-            throw new MalformedTagStringException("Beginning or ending characters incorrect.");
+            throw new MalformedTagStringException();
         }
 
         //replace all non-alphanumeric characters, spaces and commas

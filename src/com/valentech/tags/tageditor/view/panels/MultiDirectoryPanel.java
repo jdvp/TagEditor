@@ -1,5 +1,7 @@
 package com.valentech.tags.tageditor.view.panels;
 
+import com.valentech.tags.tageditor.view.TagEditorView;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.io.IOException;
@@ -15,7 +17,9 @@ import static java.nio.file.Files.isRegularFile;
 /**
  * Will display directories
  */
-public class DirectoryView extends JPanel {
+public class MultiDirectoryPanel extends JPanel {
+
+    private TagEditorView parent;
     private Path currentDirectory;
     private ArrayList<Path> dirs = new ArrayList<>();
     private ArrayList<Path> files = new ArrayList<>();
@@ -24,9 +28,10 @@ public class DirectoryView extends JPanel {
      * When the directory view is constructed, it builds the initial file and directory path lists
      * using the home directory.
      */
-    public DirectoryView(){
+    public MultiDirectoryPanel(TagEditorView parentIn){
+        parent = parentIn;
         initGUI();
-        retrieveAndDisplay(Paths.get(System.getProperty("user.home")));
+        changeDirectory(Paths.get(System.getProperty("user.home")));
     }
 
 
@@ -85,9 +90,7 @@ public class DirectoryView extends JPanel {
      * Adds the directories in this directory to the view
      */
     private void populateDirectoriesOnView(){
-        dirs.forEach(path -> {
-            add(new DirectoryPanel(path, this));
-        });
+        dirs.forEach(path -> add(new DirectoryPanel(path, this)));
     }
 
     /**
@@ -115,5 +118,6 @@ public class DirectoryView extends JPanel {
         System.out.println("CD called with "+path.toString());
 
         retrieveAndDisplay(path);
+        parent.setFileView(files);
     }
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class TagEditor {
 
     private static final String TAG_FIELD_NAME = "user.tag";
-    private UserDefinedFileAttributeView view;
+    private final UserDefinedFileAttributeView view;
 
     /**
      * Create a new tag editor for a specific file
@@ -29,6 +29,12 @@ public class TagEditor {
         view = Files.getFileAttributeView(path, UserDefinedFileAttributeView.class);
     }
 
+    /**
+     * If we already have a Path object use it instead as a constructor
+     */
+    public TagEditor(Path path){
+        view = Files.getFileAttributeView(path, UserDefinedFileAttributeView.class);
+    }
 
     /**
      * Writes to the tags field of the file
@@ -71,7 +77,7 @@ public class TagEditor {
     public void addTag(String tag) {
         //we shouldn't end up throwing this, but just in case...
         if(tag.length() > Integer.MAX_VALUE - 2)
-            throw new TagTooLongException("Tag is too long");
+            throw new TagTooLongException();
 
         ArrayList<String> tags = getTags();
         tags.add(tag);

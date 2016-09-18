@@ -21,7 +21,11 @@ public class TagEditorView extends JFrame{
     public void initGUI(){
         setSize(1000,750);
         setTitle("Tag Editor");
-        setLayout(new BorderLayout());
-        DirectoryView a = new DirectoryView();
+        setLayout(new FlowLayout());
+        DirectoryView directoryView = new DirectoryView();
+        JSplitPane splitPane  = new JSplitPane(JSplitPane.VERTICAL_SPLIT, directoryView, new JPanel());
+        directoryView.setMinimumSize(new Dimension(1000, this.getHeight()/2));
+        add(splitPane);
+
     }
 }

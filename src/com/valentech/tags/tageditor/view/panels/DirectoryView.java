@@ -1,6 +1,7 @@
 package com.valentech.tags.tageditor.view.panels;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,8 +25,8 @@ public class DirectoryView extends JPanel {
      * using the home directory.
      */
     public DirectoryView(){
-        currentDirectory = Paths.get(System.getProperty("user.home"));
-        mapCurrentDirectory();
+        initGUI();
+        retrieveAndDisplay(Paths.get(System.getProperty("user.home")));
     }
 
 
@@ -67,7 +68,52 @@ public class DirectoryView extends JPanel {
             e.printStackTrace();
         }
 
+        //TODO remove, just keeping for now
         System.out.println("dirs = " + dirs);
         System.out.println("files = " + files);
+    }
+
+    /**
+     * Initializes the UI components
+     */
+    private void initGUI(){
+        setBorder(new BevelBorder(BevelBorder.LOWERED));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+    }
+
+    /**
+     * Adds the directories in this directory to the view
+     */
+    private void populateDirectoriesOnView(){
+        dirs.forEach(path -> {
+            add(new DirectoryPanel(path, this));
+        });
+    }
+
+    /**
+     * Retrieves and displays the directories listed at the given path
+     * @param path The path of the directory that we want to navigate to
+     */
+    private void retrieveAndDisplay(Path path){
+        //retrieve
+        currentDirectory = path;
+        mapCurrentDirectory();
+
+        //display
+        populateDirectoriesOnView();
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * Changes the directory for which this panel is displaying
+     * @param path The path of the directory to display
+     */
+    public void changeDirectory(Path path){
+        //remove everything in the current path
+        removeAll();
+        System.out.println("CD called with "+path.toString());
+
+        retrieveAndDisplay(path);
     }
 }

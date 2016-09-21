@@ -20,4 +20,8 @@ public class TagEditorModel {
 
         return files.get(path).getTags();
     }
+
+    public void setTags(Path path, String tags){
+        files.get(path).setTags(tags);
+    }
 }

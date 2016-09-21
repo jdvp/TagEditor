@@ -47,4 +47,8 @@ public class TagEditorView extends JFrame{
     public ArrayList<String> getTags(Path file) {
         return model.getTags(file);
     }
+
+    public void setTags(Path file, String tags){
+        model.setTags(file, tags);
+    }
 }

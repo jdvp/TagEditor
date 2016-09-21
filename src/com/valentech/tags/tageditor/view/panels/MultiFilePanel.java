@@ -34,4 +34,8 @@ public class MultiFilePanel extends JPanel{
     public ArrayList<String> getTags(Path file) {
         return parent.getTags(file);
     }
+
+    public void setTags(Path file, String tags){
+        parent.setTags(file, tags);
+    }
 }

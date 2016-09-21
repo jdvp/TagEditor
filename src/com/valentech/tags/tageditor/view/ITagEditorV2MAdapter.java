@@ -10,8 +10,13 @@ public interface ITagEditorV2MAdapter {
     ITagEditorV2MAdapter NULL_ADAPTER = new ITagEditorV2MAdapter() {
         @Override
         public ArrayList<String> getTags(Path file) {return new ArrayList<>();}
+
+        @Override
+        public void setTags(Path file, String tags) {}
     };
 
     ArrayList<String> getTags(Path file);
+
+    void setTags(Path file, String tags);
 
 }

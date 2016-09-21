@@ -49,6 +49,17 @@ public class TagEditor {
         }
     }
 
+    public void setTags(String tags){
+        try {
+            //If we get a String to set tags we don't expect it to have been bracketed yet
+            tags = "[" + tags + "]";
+            ArrayList<String> parsedTags = TagParser.parse(tags);
+            setTags(parsedTags);
+        } catch (MalformedTagStringException m){
+            System.out.println("Unable to set tags for file since the tags input in the GUI are malformed");
+        }
+    }
+
     /**
      * Gets the tags on the file
      * @return an ArrayList of the tags found on the file

@@ -7,11 +7,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
- * Created by JD on 9/18/2016.
+ * Allows for the user to see individual files and their tags.
  */
 public class MultiFilePanel extends JPanel{
 
-    private TagEditorView parent;
+    private final TagEditorView parent;
 
     public MultiFilePanel(TagEditorView parentIn){
         parent = parentIn;
@@ -19,10 +19,18 @@ public class MultiFilePanel extends JPanel{
     }
 
 
-    public void initGUI(){
+    /**
+     * Initializes the UI
+     */
+    private void initGUI(){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
+    /**
+     * Sets the list of files that this panel should display
+     *
+     * @param files Files to display to the user
+     */
     public void setFiles(ArrayList<Path> files){
         removeAll();
 
@@ -31,10 +39,20 @@ public class MultiFilePanel extends JPanel{
         repaint();
     }
 
+    /**
+     * Returns the tags for a specified file
+     * @param file The file to get tags for
+     * @return The tags for the specified file
+     */
     public ArrayList<String> getTags(Path file) {
         return parent.getTags(file);
     }
 
+    /**
+     * Sets the tags for a specified file
+     * @param file The file to update tags on
+     * @param tags The tags to set
+     */
     public void setTags(Path file, String tags){
         parent.setTags(file, tags);
     }

@@ -19,7 +19,7 @@ import static java.nio.file.Files.isRegularFile;
  */
 public class MultiDirectoryPanel extends JPanel {
 
-    private TagEditorView parent;
+    private final TagEditorView parent;
     private Path currentDirectory;
     private ArrayList<Path> dirs = new ArrayList<>();
     private ArrayList<Path> files = new ArrayList<>();
@@ -62,7 +62,7 @@ public class MultiDirectoryPanel extends JPanel {
         try {
             Files.walk(currentDirectory, 1).filter(hiddenFile.and(dotFile)).forEach(filePath -> {
 
-                if(isDirectory(filePath)){
+                if(isDirectory(filePath) && !currentDirectory.equals(filePath)){
                     dirs.add(filePath);
                 } else if(isRegularFile(filePath)){
                     files.add(filePath);
@@ -72,10 +72,6 @@ public class MultiDirectoryPanel extends JPanel {
             System.out.println("Unable to iterate over files in the directory.");
             e.printStackTrace();
         }
-
-        //TODO remove, just keeping for now
-        System.out.println("dirs = " + dirs);
-        System.out.println("files = " + files);
     }
 
     /**
@@ -115,9 +111,15 @@ public class MultiDirectoryPanel extends JPanel {
     public void changeDirectory(Path path){
         //remove everything in the current path
         removeAll();
-        System.out.println("CD called with "+path.toString());
 
         retrieveAndDisplay(path);
         parent.setFileView(files);
+    }
+
+    /**
+     * @return The current directory that this panel is displaying children directories for
+     */
+    public Path getCurrentDirectory(){
+        return currentDirectory;
     }
 }

@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 /**
  * Class used to parse and unparse tags between tag list strings and tag array lists
  */
-public class TagParser {
+class TagParser {
 
     private static final String DELIMITER = ",";
     private static final String NON_ALLOWED_REGEX = "[^A-Za-z0-9, ]";

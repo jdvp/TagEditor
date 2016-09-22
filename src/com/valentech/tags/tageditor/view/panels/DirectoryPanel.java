@@ -12,7 +12,7 @@ import java.nio.file.Path;
  * Generally I wouldn't couple this so closely to its parent (MultiDirectoryPanel) but I didn't make this class to enable
  * decoupling but more to make the code easier to read.
  */
-public class DirectoryPanel extends JPanel{
+class DirectoryPanel extends JPanel{
 
     public DirectoryPanel(Path directoryName, MultiDirectoryPanel parent){
         setAlignmentX(LEFT_ALIGNMENT);
@@ -22,7 +22,6 @@ public class DirectoryPanel extends JPanel{
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("directory "+directoryName+" clicked");
                 parent.changeDirectory(directoryName);
             }
 

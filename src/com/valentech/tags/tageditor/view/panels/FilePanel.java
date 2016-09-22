@@ -8,9 +8,11 @@ import java.nio.file.Path;
 import java.util.StringJoiner;
 
 /**
- * Created by JD on 9/18/2016.
+ * Displays a single file element.
+ * This consists of the file's name and a list of its tags.
+ * If the tags have been edited, it also includes a save button.
  */
-public class FilePanel extends JPanel {
+class FilePanel extends JPanel {
 
     public FilePanel(Path file, MultiFilePanel parent){
         setBackground(Color.CYAN);
@@ -24,6 +26,11 @@ public class FilePanel extends JPanel {
 
         refreshData(file, parent, tagField);
 
+        /*
+        If the tag field is edited, display a 'save' button to the user.
+        We do this instead of saving automatically because we aren't sure if the user even wants to save and it
+        allows for less writes to the disk.
+        */
         tagField.getDocument().addDocumentListener(new DocumentListener() {
 
             private boolean alreadyEditing = false;
@@ -44,12 +51,11 @@ public class FilePanel extends JPanel {
 
             private void addSaveButton(){
                 alreadyEditing = true;
-                System.out.println("addSaveButton");
                 JButton save = new JButton("Save Changes");
                 save.addActionListener(e -> {
                     parent.setTags(file, tagField.getText());
-                    alreadyEditing = false;
                     refreshData(file, parent, tagField);
+                    alreadyEditing = false;
                     FilePanel.this.remove(save);
                     FilePanel.this.refreshSize();
                 });
@@ -65,6 +71,9 @@ public class FilePanel extends JPanel {
         refreshSize();
     }
 
+    /**
+     * Re-sizes this panel based on the content within
+     */
     private void refreshSize(){
         setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getPreferredSize().height));
         setMinimumSize(this.getPreferredSize());

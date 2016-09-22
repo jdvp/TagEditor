@@ -1,7 +1,6 @@
 package com.valentech.tags.tageditor.model;
 
 import com.valentech.tags.tageditor.exceptions.MalformedTagStringException;
-import com.valentech.tags.tageditor.model.TagParser;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
 /**
- * Created by JD on 9/16/2016.
+ * Used to test the TagParser class
  */
 public class TagParserTest {
 

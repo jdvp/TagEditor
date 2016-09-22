@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Class that will edit the tags on a specific, given file.
  */
-public class TagEditor {
+class TagEditor {
 
     private static final String TAG_FIELD_NAME = "user.tag";
     private final UserDefinedFileAttributeView view;
@@ -49,6 +49,10 @@ public class TagEditor {
         }
     }
 
+    /**
+     * Writes to the tags field of the file after checking that the string is well-formatted
+     * @param tags the tags to write in String format
+     */
     public void setTags(String tags){
         try {
             //If we get a String to set tags we don't expect it to have been bracketed yet
@@ -71,8 +75,9 @@ public class TagEditor {
             buf.flip();
             String value = Charset.defaultCharset().decode(buf).toString();
             return TagParser.parse(value);
-        } catch (IOException e){
-            System.out.println("The file has no tags.");
+        } catch (IOException ignored){
+            //this just means the file does not have any tags so we don't really need to do anything
+            //System.out.println("The file has no tags.");
         } catch (MalformedTagStringException e){
             System.out.println("The tags on the file are corrupted.");
             //delete the corrupted tags since we can't use them anyway

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Created by JD on 9/16/2016.
+ * Used to test the TagEditor class.
  */
 public class TagEditorTest {
 
